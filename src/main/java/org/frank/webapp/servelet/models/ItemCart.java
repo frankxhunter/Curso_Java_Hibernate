@@ -2,6 +2,8 @@ package org.frank.webapp.servelet.models;
 
 import java.util.Objects;
 
+import org.frank.webapp.servelet.models.Entities.Product;
+
 public class ItemCart {
     private int cant ;
     private Product product;

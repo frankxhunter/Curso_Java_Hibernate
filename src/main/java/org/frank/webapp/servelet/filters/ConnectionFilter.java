@@ -1,13 +1,9 @@
 package org.frank.webapp.servelet.filters;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 
-import org.frank.webapp.servelet.configs.MySQLConnection;
 import org.frank.webapp.servelet.services.ServiceJDBCException;
 
-import jakarta.inject.Inject;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -19,31 +15,31 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebFilter("/*")
 public class ConnectionFilter implements Filter {
 
-    @Inject
-    @MySQLConnection
-    private Connection connection;
+    // @Inject
+    // @MySQLConnection
+    // private Connection connection;
 
-    @Override
+    @Override 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
             throws IOException, ServletException {
-        try  {
-            Connection con = this.connection;
-            if (con.getAutoCommit()) {
-                con.setAutoCommit(false);
-            }
+        // try  {
+        //     Connection con = this.connection;
+        //     if (con.getAutoCommit()) {
+        //         con.setAutoCommit(false);
+        //     }
             try {
                 chain.doFilter(req, resp);
-                con.commit();
-            } catch (SQLException | ServiceJDBCException e) {
-                con.rollback();
+                // con.commit();
+            } catch ( ServiceJDBCException e) {
+                // con.rollback();
                 ((HttpServletResponse) resp).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
                         e.getMessage());
                 e.printStackTrace();
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        // } catch (SQLException e) {
+        //     e.printStackTrace();
+        // }
     }
 
 }

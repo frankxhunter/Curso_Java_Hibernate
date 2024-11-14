@@ -6,12 +6,15 @@ import java.util.logging.Logger;
 
 import javax.sql.DataSource;
 
+import org.frank.webapp.servelet.util.JpaUtil;
+
 import jakarta.annotation.Resource;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Disposes;
 import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.spi.InjectionPoint;
+import jakarta.persistence.EntityManager;
 
 @Dependent
 public class ProducersResources {
@@ -48,6 +51,20 @@ public class ProducersResources {
         connection.close();
         System.out.println("Cerrando la Conexion a la base de datos");
         
+    }
+
+    @Produces
+    @RequestScoped
+    private EntityManager beanEntityManager(){
+        return JpaUtil.getEntityManager();
+    }
+
+    public void close(@Disposes EntityManager entityManager){
+        if(entityManager.isOpen()){
+            entityManager.close();
+            System.out.println("Cerrando la conexion del Entitymanger");
+            
+        }
     }
 
 }

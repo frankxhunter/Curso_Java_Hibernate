@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.frank.webapp.servelet.configs.MySQLConnection;
-import org.frank.webapp.servelet.models.Category;
+import org.frank.webapp.servelet.models.Entities.Category;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

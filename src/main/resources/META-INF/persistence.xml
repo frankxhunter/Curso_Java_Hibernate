@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence>
+    <persistence-unit name="ejemplo" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <propierties>
+            <propierty name="jakarta.persistence.jdbc.url" values="jdbc:mysql//localhost:3306/curso_java"></propierty>
+            <propierty name="jakarta.persistence.jdbc.driver" values="com.mysql.cj.jdbc.Driver"></propierty>
+            <propierty name="jakarta.persistence.jdbc.user" values="root"></propierty>
+            <propierty name="jakarta.persistence.jdbc.password" values="root"></propierty>
+            <propierty name="hibernate.show_sql" values="true"></propierty>
+            <propierty name="hibernate.dialect" values="org.hibernate.dialect.MySQL8Dialect"></propierty>
+        </propierties>
+    </persistence-unit>
+</persistence>

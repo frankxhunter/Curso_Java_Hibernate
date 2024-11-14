@@ -1,13 +1,14 @@
 package org.frank.webapp.servelet.services;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 import org.frank.webapp.servelet.Interceptors.Logging;
-import org.frank.webapp.servelet.models.Category;
-import org.frank.webapp.servelet.models.Product;
+import org.frank.webapp.servelet.Interceptors.TransactionalJdbc;
+import org.frank.webapp.servelet.models.Entities.Category;
+import org.frank.webapp.servelet.models.Entities.Product;
 import org.frank.webapp.servelet.repositories.Repository;
+import org.frank.webapp.servelet.repositories.RepositoryJpa;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -16,17 +17,19 @@ import jakarta.inject.Inject;
 public class ServicesDB {
 
     @Inject
+    @RepositoryJpa
     private Repository<Product> productRepository;
 
     @Inject
+    @RepositoryJpa
     private Repository<Category> categoryRepository;
 
     @Logging
+    @TransactionalJdbc
     public List<Product> listAllProduct() {
         try {
             return productRepository.listAll();
-
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new ServiceJDBCException(e.getMessage(), e);
         }
     }
@@ -34,7 +37,7 @@ public class ServicesDB {
     public Optional<Product> findProductById(Long id) {
         try {
             return Optional.of(productRepository.findById(id));
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new ServiceJDBCException(e.getMessage(), e);
         }
     }
@@ -43,7 +46,7 @@ public class ServicesDB {
         try {
             return categoryRepository.listAll();
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new ServiceJDBCException(e.getMessage(), e);
         }
     }
@@ -51,7 +54,7 @@ public class ServicesDB {
     public Optional<Category> findCategoryById(Long id) {
         try {
             return Optional.of(categoryRepository.findById(id));
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new ServiceJDBCException(e.getMessage(), e);
         }
     }
@@ -60,7 +63,7 @@ public class ServicesDB {
         try {
             productRepository.save(p);
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new ServiceJDBCException(e.getMessage(), e);
         }
     }
@@ -68,7 +71,7 @@ public class ServicesDB {
     public void deleteProduct(Long id) {
         try {
             productRepository.delete(id);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new ServiceJDBCException(e.getMessage(), e);
         }
     }

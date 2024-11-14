@@ -6,8 +6,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
-import org.frank.webapp.servelet.models.Category;
-import org.frank.webapp.servelet.models.Product;
+import org.frank.webapp.servelet.models.Entities.Category;
+import org.frank.webapp.servelet.models.Entities.Product;
 import org.frank.webapp.servelet.services.ServicesDB;
 
 import jakarta.inject.Inject;

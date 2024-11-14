@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 import org.frank.webapp.servelet.Interceptors.Logging;
+import org.frank.webapp.servelet.Interceptors.TransactionalJdbc;
 import org.frank.webapp.servelet.models.SessionWeb;
 import org.frank.webapp.servelet.repositories.SessionReposity;
 
@@ -13,13 +14,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @ApplicationScoped 
+@TransactionalJdbc
 public class LoginServices {
 
     @Inject
     private SessionReposity repo;
 
     public Optional<String> getUserName(HttpServletRequest req) {
-        HttpSession session = req.getSession();
+    HttpSession session = req.getSession();
         String username = (String) session.getAttribute("username");
         if (username != null) {
             return Optional.of(username);

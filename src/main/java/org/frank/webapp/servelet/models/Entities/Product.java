@@ -1,10 +1,22 @@
-package org.frank.webapp.servelet.models;
+package org.frank.webapp.servelet.models.Entities;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="productos")
 public class Product {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Category categoria;
     private int price;
     private String sku;

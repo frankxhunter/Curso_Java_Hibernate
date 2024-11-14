@@ -2,10 +2,9 @@ package org.frank.webapp.servelet.controlers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.Optional;
 
-import org.frank.webapp.servelet.models.User;
+import org.frank.webapp.servelet.models.Entities.User;
 import org.frank.webapp.servelet.repositories.UserRepository;
 import org.frank.webapp.servelet.services.LoginServices;
 import org.frank.webapp.servelet.services.ServiceJDBCException;
@@ -67,7 +66,7 @@ public class LoginServlet extends HttpServlet {
             if(user != null && user.getPassword().equals(password)){
                 isCorrect = true;
             }
-        }catch(SQLException e){
+        }catch(Exception e){
             throw new ServiceJDBCException(e.getMessage());
         }
 
@@ -86,8 +85,9 @@ public class LoginServlet extends HttpServlet {
             }
 
         } else {
-            resp.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Lo sentimos, pero no esta autorizado" +
-                    " para ingresar a esta pagina ");
+            resp.sendError(HttpServletResponse.SC_UNAUTHORIZED, """
+                Lo sentimos, usted no esta autorizado para acceder a esta pagina 
+                    """);
         }
     }
 }

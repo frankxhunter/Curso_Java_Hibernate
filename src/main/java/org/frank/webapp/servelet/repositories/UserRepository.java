@@ -3,11 +3,10 @@ package org.frank.webapp.servelet.repositories;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.frank.webapp.servelet.configs.MySQLConnection;
-import org.frank.webapp.servelet.models.User;
+import org.frank.webapp.servelet.models.Entities.User;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -22,18 +21,18 @@ public class UserRepository implements Repository<User> {
     }
 
     @Override
-    public List<User> listAll() throws SQLException {
+    public List<User> listAll() throws Exception {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'listAll'");
     }
 
     @Override
-    public void delete(long id) throws SQLException {
+    public void delete(long id) throws Exception {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
 
-    public User findById(int id) throws SQLException {
+    public User findById(int id) throws Exception {
         User user = new User();
 
         String sql = """
@@ -54,7 +53,7 @@ public class UserRepository implements Repository<User> {
         return user;
     }
 
-    public User findByUserName(String username) throws SQLException {
+    public User findByUserName(String username) throws Exception {
         User user = null;
 
         String sql = """
@@ -76,7 +75,7 @@ public class UserRepository implements Repository<User> {
     }
 
     @Override
-    public void save(User t) throws SQLException {
+    public void save(User t) throws Exception {
         String sql = "";
         if (t.getId() == 0) {
             sql = """
@@ -103,16 +102,16 @@ public class UserRepository implements Repository<User> {
 
     }
 
-    private User getUser(ResultSet result) throws SQLException {
+    private User getUser(ResultSet result) throws Exception {
         User user = new User();
-        user.setId(result.getInt("id"));
+        user.setId(result.getLong("id"));
         user.setUsername(result.getString("username"));
         user.setPassword(result.getString("password"));
         return user;
     }
 
     @Override
-    public User findById(Long id) throws SQLException {
+    public User findById(Long id) throws Exception {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findById'");
     }

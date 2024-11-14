@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-import org.frank.webapp.servelet.models.Product;
+import org.frank.webapp.servelet.models.Entities.Product;
 import org.frank.webapp.servelet.services.LoginServices;
 import org.frank.webapp.servelet.services.ServicesDB;
 
